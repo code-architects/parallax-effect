@@ -1,0 +1,181 @@
+:root {
+  --color-bg: oklch(16% 0.03 260);
+  --color-bg-2: oklch(21% 0.045 262);
+  --color-ink: oklch(96% 0.01 260);
+  --color-ink-dim: oklch(78% 0.02 260);
+  --color-accent: oklch(78% 0.15 55);
+  --color-accent-2: oklch(55% 0.14 285);
+  --color-focus: oklch(85% 0.16 55);
+  --font-body: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --space-sm: 0.75rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  overflow-x: clip;
+}
+
+a { color: var(--color-accent); }
+
+code {
+  background: color-mix(in oklch, var(--color-ink) 12%, transparent);
+  padding: 0.1em 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+}
+
+.parallax {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.scene {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.layer--back,
+.layer--mid {
+  top: -70%;
+  height: 240%;
+  will-change: transform;
+}
+
+.layer--back {
+  background: radial-gradient(circle 42vh at 28% 32%, oklch(58% 0.15 285 / 55%), transparent 72%),
+              radial-gradient(circle 46vh at 76% 68%, oklch(72% 0.16 55 / 55%), transparent 72%),
+              var(--color-bg);
+}
+
+.layer--mid {
+  background-image: radial-gradient(circle, color-mix(in oklch, var(--color-ink) 20%, transparent) 2px, transparent 2.5px);
+  background-size: 64px 64px;
+  opacity: 0.35;
+}
+
+.scene--alt .layer--back {
+  background: radial-gradient(circle 44vh at 70% 28%, oklch(72% 0.16 55 / 55%), transparent 72%),
+              radial-gradient(circle 40vh at 22% 78%, oklch(58% 0.15 285 / 55%), transparent 72%),
+              var(--color-bg-2);
+}
+
+.layer--base {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+.scene__content {
+  max-width: 42rem;
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-sm);
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 var(--space-sm);
+  font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+h2 {
+  margin: 0 0 var(--space-sm);
+  font-size: clamp(1.5rem, 3vw + 1rem, 2.25rem);
+  overflow-wrap: anywhere;
+}
+
+.lede {
+  margin: 0 auto;
+  color: var(--color-ink-dim);
+  font-size: clamp(1rem, 1vw + 0.85rem, 1.15rem);
+  line-height: 1.6;
+}
+
+.scroll-cue {
+  display: block;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin: var(--space-lg) auto 0;
+  border-right: 2px solid var(--color-ink-dim);
+  border-bottom: 2px solid var(--color-ink-dim);
+  transform: rotate(45deg);
+  animation: cue-bob 1.6s var(--ease-out) infinite;
+}
+
+@keyframes cue-bob {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); }
+  50% { transform: rotate(45deg) translate(0.4rem, 0.4rem); }
+}
+
+.cta {
+  display: inline-block;
+  margin-top: var(--space-md);
+  padding: 0.75em 1.5em;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cta:hover { background: var(--color-focus); }
+
+a:focus-visible,
+.parallax:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax {
+    height: auto;
+    overflow: visible;
+    scroll-behavior: auto;
+  }
+  .scene {
+    height: auto;
+    min-height: 100vh;
+  }
+  .layer--back,
+  .layer--mid {
+    display: none;
+  }
+  .layer--base {
+    position: static;
+  }
+  .scroll-cue {
+    animation: none;
+  }
+}

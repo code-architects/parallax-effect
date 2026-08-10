@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallax Effect — Scroll Depth Demo</title>
+<meta name="description" content="A three-layer parallax scroll effect: background layers drift slower than foreground content as you scroll, built with a small rAF-throttled script.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="parallax" tabindex="0" role="region" aria-label="Parallax scroll demo">
+
+  <section class="scene" id="top">
+    <div class="layer layer--back" data-speed="0.4" aria-hidden="true"></div>
+    <div class="layer layer--mid" data-speed="0.7" aria-hidden="true"></div>
+    <div class="layer layer--base">
+      <div class="scene__content">
+        <p class="eyebrow">Scroll to explore</p>
+        <h1>Depth, without the weight</h1>
+        <p class="lede">Three layers, three speeds. Background drifts slower than foreground as you scroll.</p>
+        <span class="scroll-cue" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene scene--alt">
+    <div class="layer layer--back" data-speed="0.4" aria-hidden="true"></div>
+    <div class="layer layer--mid" data-speed="0.7" aria-hidden="true"></div>
+    <div class="layer layer--base">
+      <div class="scene__content">
+        <h2>How it works</h2>
+        <p class="lede">Each background layer tracks the scene's position in the viewport and shifts by <code>position × speed</code>. Slower speed reads as farther away. One scroll listener, rAF-throttled, <code>transform</code> only.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene">
+    <div class="layer layer--back" data-speed="0.4" aria-hidden="true"></div>
+    <div class="layer layer--mid" data-speed="0.7" aria-hidden="true"></div>
+    <div class="layer layer--base">
+      <div class="scene__content">
+        <h2>Ship it as-is</h2>
+        <p class="lede">Drop it into any hero or section break. Respects reduced motion, keyboard-scrollable, and costs one small script.</p>
+        <a class="cta" href="#top">Back to top</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
